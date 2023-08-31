@@ -45,11 +45,11 @@ jobs:
         </Project>
         EOF
 
+    - name: Build
+      run: dotnet build UnnamedTechMod.sln --configuration ${{ matrix.configuration }}
+
     - name: Archive .tmod file
       uses: actions/upload-artifact@v3
       with:
         name: UnnamedTechMod.tmod
         path: Saves/tModLoader/Mods/UnnamedTechMod.tmod
-
-    - name: Build
-      run: dotnet build UnnamedTechMod.sln --configuration ${{ matrix.configuration }}
