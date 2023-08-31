@@ -1,0 +1,50 @@
+# TODO: Build automatically depending on commit type.
+name: Build .tmod
+
+env:
+  TML_VERSION: 2023.06.25.31
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    strategy:
+        matrix:
+          configuration: [Debug, Release]
+
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: UnnamedTechMod.sln
+      # Test_Project_Path: your-test-project-path
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Download tModLoader
+      run: |
+        curl -s https://github.com/tModLoader/tModLoader/releases/download/v$TML_VERSION/tModLoader.zip -o tModLoader.zip
+        unzip tModLoader.zip -d tModLoader/
+        rm tModLoader.zip
+
+    - name: Create tModLoader.targets
+      run: |
+        cat > tModLoader.targets << EOF
+        <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+          <Import Project="tModLoader/tMLMod.targets" />
+        </Project>
+        EOF
+
+    - name: Build
+      run: dotnet build UnnamedTechMod.sln --configuration ${{ matrix.configuration }}
+
+    - name: Tree
+      run: tree
+        
