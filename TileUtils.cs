@@ -39,7 +39,7 @@ public static class TileUtils
     public static bool PlaceTransportMedium(int x, int y, TransportType transportType)
     {
         var tile = Main.tile[x, y];
-        var data = tile.Get<TransportTileData>();
+        ref var data = ref tile.Get<TransportTileData>();
 
         if (data.CarriedMediums.HasFlag(transportType))
             return false;
@@ -51,7 +51,7 @@ public static class TileUtils
     public static bool DestroyTransportMedium(int x, int y, TransportType transportType)
     {
         var tile = Main.tile[x, y];
-        var data = tile.Get<TransportTileData>();
+        ref var data = ref tile.Get<TransportTileData>();
 
         if (!data.CarriedMediums.HasFlag(transportType))
             return false;
