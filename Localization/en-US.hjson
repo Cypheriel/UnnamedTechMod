@@ -11,47 +11,53 @@
 				# NOTE: Generation rates >=1000W will trigger the "general" specifier's switch to scientific notation.
 				GenerationRateText: "[c/ffa500:Generation Rate]: {0:G3}[c/ffff00:W]"
 				HeatLevelText: "[c/ffa500:Heat Level]: {0:N0}"
-				RelayModeEnabled: Relay connection mode enabled
-				RelayModeDisabled: Relay connection mode disabled
-				RelaySwitched: Switched relays
+				RelayModeEnabled: "Relay connection mode enabled"
+				RelayModeDisabled: "Relay connection mode disabled"
+				RelaySwitched: "Switched relays"
 			}
 	
 			Items: {
 				BatteryItem: {
 					DisplayName: Battery
-					Tooltip: This is battery.
+					Tooltip: '''
+							 Capacitive tile that will store inputted energy
+							 'Unlawful'
+							 '''
 				}
 	
 				DummyItem: {
 					DisplayName: Dummy Item
-					Tooltip: o_o
+					Tooltip: "I really do worry for those that come across this item"
 				}
 
 				RelayItem: {
 					DisplayName: Relay
-					Tooltip: ""
+					Tooltip: '''
+							 Transfers energy from once location to another
+							 Use in conjunction with the Configurator
+							 '''
 				}
 	
 				WindTurbineItem: {
 					DisplayName: Wind Turbine
-					Tooltip: ""
+					Tooltip: "Generates power based on the current wind speed"
 				}
 	
 				ThermalReactorItem: {
 					DisplayName: Thermal Reactor
-					Tooltip: ""
+					Tooltip: "Generates power based on the heat of surrounding tiles and liquids"
 				}
 				
 				AutomatedRefinerItem: {
 					DisplayName: Automated Refiner
-					Tooltip: "Automatically extracts materials from others"
+					Tooltip: "Automatically extracts materials from inserted items"
 				}
 	
 				ConfiguratorToolItem: {
 					DisplayName: Configurator Tool
 					Tooltip: '''
-							 This is multiple lines or something
-							 o_o
+							 Left-click a relay tile to configure it
+							 Right-click anywhere to change the current binding mode
 							 '''
 				}
 			}
