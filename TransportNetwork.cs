@@ -17,7 +17,7 @@ public class TransportNetwork
     {
         if (transportType.ToString().Count(c => c == '1') != 1)
             throw new ArgumentException("transportType should only be a single flag");
-        transportType = TransportType;
+        TransportType = transportType;
     }
     
     #nullable enable
@@ -45,7 +45,7 @@ public class TransportNetwork
         foreach (var position in adjacentTilePositions)
         {
             var network = TryFromPosition(position, transportType);
-            if (network is not null)
+            if (network is not null && network.TransportType == transportType)
             {
                 result.Add(network);
             }
