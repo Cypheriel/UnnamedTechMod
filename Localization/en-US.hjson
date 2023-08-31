@@ -29,14 +29,6 @@
 					DisplayName: Dummy Item
 					Tooltip: "I really do worry for those that come across this item"
 				}
-
-				RelayItem: {
-					DisplayName: Relay
-					Tooltip: '''
-							 Transfers energy from once location to another
-							 Use in conjunction with the Configurator
-							 '''
-				}
 	
 				WindTurbineItem: {
 					DisplayName: Wind Turbine
@@ -51,14 +43,6 @@
 				AutomatedRefinerItem: {
 					DisplayName: Automated Refiner
 					Tooltip: "Automatically extracts materials from inserted items"
-				}
-	
-				ConfiguratorToolItem: {
-					DisplayName: Configurator Tool
-					Tooltip: '''
-							 Left-click a relay tile to configure it
-							 Right-click anywhere to change the current binding mode
-							 '''
 				}
 				
 				CableCutterItem: {
