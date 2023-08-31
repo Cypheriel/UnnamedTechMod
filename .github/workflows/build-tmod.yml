@@ -3,7 +3,7 @@ name: Build .tmod
 
 env:
   TML_VERSION: 2023.06.25.31
-  TML_SAVEDIR: ./Saves/ # Does this do anything?
+  TML_SAVEDIR: ./
 
 on:
   push:
