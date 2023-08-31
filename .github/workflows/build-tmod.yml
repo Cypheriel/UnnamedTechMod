@@ -49,7 +49,7 @@ jobs:
       run: dotnet build UnnamedTechMod.sln --configuration ${{ matrix.configuration }}
 
     - name: Tree
-      run: tree /f ../
+      run: tree /f /a ../
 
     - name: Archive .tmod file
       uses: actions/upload-artifact@v3
