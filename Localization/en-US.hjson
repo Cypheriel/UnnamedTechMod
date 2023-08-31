@@ -60,6 +60,14 @@
 							 Right-click anywhere to change the current binding mode
 							 '''
 				}
+				
+				CableCutterItem: {
+					DisplayName: Cable Cutter
+					Tooltip: '''
+							 Use on a tile to strip it of any cables
+							 '*snip* *snip*'
+							 '''
+				}
 			}
 	
 			Tiles: {
