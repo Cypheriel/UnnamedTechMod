@@ -35,6 +35,7 @@ jobs:
         rm tModLoader.zip
 
     - name: Create tModLoader.targets
+      shell: bash
       run: |
         cat >> tModLoader.targets << EOF
         <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
