@@ -21,14 +21,8 @@ public class Cable : ModItem
         if (player.whoAmI != Main.myPlayer)
             return null;
 
-        var tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
-        ref var data = ref tile.Get<TransportTileData>();
-        Mod.Logger.Debug($"Pre-place data: {data}");
-        if (data.CarriedMediums.HasFlag(TransportType.Cable))
-            return null;
-        
-        data.CarriedMediums |= TransportType.Cable;
-        Mod.Logger.Debug($"Post-place data: {data}");
-        return true;
+        return TileUtils.PlaceTransportMedium(Player.tileTargetX, Player.tileTargetY, TransportType.Cable)
+            ? true
+            : null;
     }
 }
