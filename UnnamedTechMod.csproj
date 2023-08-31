@@ -9,7 +9,7 @@
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
 
     <!-- Override savedirectory when building for GitHub Actions. -->
-    <ExtraBuildModFlags Condition="'$(TML_SAVEDIR)' != ''">$(ExtraBuildModFlags)-savedirectory $(TML_SAVEDIR) </ExtraBuildModFlags>
+    <ExtraBuildModFlags Condition="'$(TML_SAVEDIR)' != ''">$(ExtraBuildModFlags)-savedirectory &quot;$([System.IO.Path]::GetFullPath('.'))/$(TML_PATH_OVERRIDE)&quot; </ExtraBuildModFlags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.5" />
