@@ -15,7 +15,8 @@ jobs:
   build:
     strategy:
         matrix:
-          configuration: [Debug, Release]
+          # TODO: Add "Release"
+          configuration: [Debug]
 
 
     runs-on: windows-latest
@@ -46,6 +47,6 @@ jobs:
     - name: Build
       run: dotnet build UnnamedTechMod.sln --configuration ${{ matrix.configuration }}
 
-    - name: Tree
-      run: tree
-        
+    - name: Locate .tmod
+      shell: bash
+      run: find ~+ -type f -name "UnnamedTechMod.tmod"
