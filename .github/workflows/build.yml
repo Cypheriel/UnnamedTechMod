@@ -12,8 +12,7 @@ jobs:
   build:
     strategy:
         matrix:
-          # TODO: Add "Release"
-          configuration: [Debug]
+          configuration: [Debug, Release]
 
     if: ${{
         (startsWith(github.event.head_commit.message, 'feat')
