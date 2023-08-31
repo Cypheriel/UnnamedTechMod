@@ -1,0 +1,3 @@
+displayName = [c/5c2be2:Unnamed Tech Mod]
+author = Cypheriel
+version = 0.1

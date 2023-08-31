@@ -1,0 +1,68 @@
+{
+	Mods: {
+		UnnamedTechMod: {
+			Common: {
+				CapacitorActiveText: "[c/00ff00:Active]"
+				CapacitorInactiveText: "[c/ff0000:Inactive]"
+				CapacityText: "[c/ffa500:Capacity]: [c/ff0000:{0:N1}]/{1:N0}[c/ffff00:J]"
+				VoltageText: "[c/ffa500:Voltage]: {0:N0}[c/ffff00:V]"
+				CurrentText: "[c/ffa500:Current]: {0:N0}[c/ffff00:A]"
+				PassiveDrawText: "[c/ffa500:Passive Draw]: {0:N0}[c/ffff00:W]"
+				# NOTE: Generation rates >=1000W will trigger the "general" specifier's switch to scientific notation.
+				GenerationRateText: "[c/ffa500:Generation Rate]: {0:G3}[c/ffff00:W]"
+				HeatLevelText: "[c/ffa500:Heat Level]: {0:N0}"
+				RelayModeEnabled: Relay connection mode enabled
+				RelayModeDisabled: Relay connection mode disabled
+				RelaySwitched: Switched relays
+			}
+	
+			Items: {
+				BatteryItem: {
+					DisplayName: Battery
+					Tooltip: This is battery.
+				}
+	
+				DummyItem: {
+					DisplayName: Dummy Item
+					Tooltip: o_o
+				}
+
+				RelayItem: {
+					DisplayName: Relay
+					Tooltip: ""
+				}
+	
+				WindTurbineItem: {
+					DisplayName: Wind Turbine
+					Tooltip: ""
+				}
+	
+				ThermalReactorItem: {
+					DisplayName: Thermal Reactor
+					Tooltip: ""
+				}
+				
+				AutomatedRefinerItem: {
+					DisplayName: Automated Refiner
+					Tooltip: "Automatically extracts materials from others"
+				}
+	
+				ConfiguratorToolItem: {
+					DisplayName: Configurator Tool
+					Tooltip: '''
+							 This is multiple lines or something
+							 o_o
+							 '''
+				}
+			}
+	
+			Tiles: {
+				BatteryTile.MapEntry: Battery
+				RelayTile.MapEntry: Relay
+				WindTurbineTile.MapEntry: Wind Turbine
+				ThermalReactorTile.MapEntry: Thermal Reactor
+				AutomatedRefinerTile.MapEntry: Automated Refiner
+			}
+		}
+	}
+}
