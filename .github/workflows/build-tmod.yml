@@ -3,6 +3,7 @@ name: Build .tmod
 
 env:
   TML_VERSION: 2023.06.25.31
+  TML_SAVEDIR: ./Saves/
 
 on:
   push:
@@ -44,9 +45,11 @@ jobs:
         </Project>
         EOF
 
+    - name: Archive .tmod file
+      uses: actions/upload-artifact@v3
+      with:
+        name: UnnamedTechMod.tmod
+        path: Saves/tModLoader/Mods/UnnamedTechMod.tmod
+
     - name: Build
       run: dotnet build UnnamedTechMod.sln --configuration ${{ matrix.configuration }}
-
-    - name: Locate .tmod
-      shell: bash
-      run: find ~+ -type f -name "UnnamedTechMod.tmod"
