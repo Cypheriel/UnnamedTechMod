@@ -13,11 +13,12 @@ public class TransportNetwork
     public List<Point> TransportMediums = new();
     public TransportType TransportType;
 
-    private TransportNetwork(TransportType transportType)
+    public TransportNetwork(TransportType transportType, Point position)
     {
         if (transportType.ToString().Count(c => c == '1') != 1)
             throw new ArgumentException("transportType should only be a single flag");
         TransportType = transportType;
+        TransportMediums.Add(position);
     }
     
     #nullable enable

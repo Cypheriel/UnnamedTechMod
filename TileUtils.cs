@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.ObjectData;
 using UnnamedTechMod.Common.TileData;
@@ -45,6 +46,16 @@ public static class TileUtils
             return false;
 
         data.CarriedMediums |= transportType;
+
+        var network = TransportNetwork.TryFromPosition(new Point(x, y), transportType);
+        if (network is not null)
+            return false;
+
+        network = new TransportNetwork(transportType, new Point(x, y));
+        
+        UnnamedTechMod.TransportNetworks.Add(network);
+        network.MergeNetworks(TransportNetwork.AdjacentNetworks(x, y, transportType).ToArray());
+        
         return true;
     }
     
@@ -57,6 +68,9 @@ public static class TileUtils
             return false;
 
         data.CarriedMediums ^= transportType;
-        return true;
+        
+        var network = TransportNetwork.TryFromPosition(new Point(x, y), transportType);
+        
+        return network is not null && network.TransportMediums.Remove(new Point(x, y));
     }
 }
