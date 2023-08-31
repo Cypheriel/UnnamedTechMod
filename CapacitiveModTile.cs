@@ -4,9 +4,7 @@ using Terraria.DataStructures;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using UnnamedTechMod.Common.Players;
 using UnnamedTechMod.Content.Items;
-using UnnamedTechMod.Content.Items.Tools;
 
 namespace UnnamedTechMod;
 
@@ -54,18 +52,12 @@ public abstract class CapacitiveModTile<T> : CapacitiveModTile where T : Capacit
         
         if (fail)
             return;
-        
-        var player = Main.LocalPlayer.GetModPlayer<EnergyConnectionPlayer>();
-
-        if (player.InConnectionMode && player.ConnectionModeTile == new Point16(i, j))
-            player.ConnectionModeTile = null;
 
         ModContent.GetInstance<T>().Kill(i, j);
     }
     
     /// <summary>
     /// Called by <see cref="KillTile"/>.
-    /// Additionally kills attached tile entity of type <c>T</c> and unsets <see cref="EnergyConnectionPlayer.ConnectionModeTile"/>.
     /// </summary>
     /// <remarks>
     /// Use in place of <see cref="KillTile"/>.
@@ -88,13 +80,6 @@ public abstract class CapacitiveModTile<T> : CapacitiveModTile where T : Capacit
 
     public sealed override bool RightClick(int i, int j)
     {
-        var player = Main.LocalPlayer.GetModPlayer<EnergyConnectionPlayer>();
-
-        if (player.InConnectionMode && player.Player.HeldItem.ModItem is ConfiguratorToolItem)
-        {
-            return false;
-        }
-        
         return SafeRightClick(i, j);
     }
 

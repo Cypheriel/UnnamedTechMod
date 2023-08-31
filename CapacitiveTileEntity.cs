@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using UnnamedTechMod.Common.Players;
-using UnnamedTechMod.Content.TileEntities;
 
 namespace UnnamedTechMod;
 
@@ -14,7 +11,6 @@ namespace UnnamedTechMod;
 public abstract class CapacitiveTileEntity : ModTileEntity
 {
     public readonly Capacitor Capacitor;
-    public List<RelayTileEntity> BoundRelays = new();
 
     protected CapacitiveTileEntity(double voltage, double current, int capacityMax, double passiveDraw = 0)
     {
@@ -66,19 +62,5 @@ public abstract class CapacitiveTileEntity : ModTileEntity
     public override void LoadData(TagCompound tag)
     {
         Capacitor.CapacityJoules = tag.GetDouble("capacity");
-    }
-
-    public override void OnKill()
-    {
-        var player = Main.LocalPlayer.GetModPlayer<EnergyConnectionPlayer>();
-
-        if (player.InConnectionMode && Position == player.ConnectionModeTile)
-            return;
-
-        foreach (var boundRelay in BoundRelays)
-        {
-            boundRelay.Loads.Remove(this);
-            boundRelay.Sources.Remove(this);
-        }
     }
 }
