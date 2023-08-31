@@ -4,7 +4,7 @@ using Terraria;
 namespace UnnamedTechMod.Common.TileData;
 
 [Flags]
-public enum TransportType
+public enum TransportType : byte
 {
     Cable = 0b100,
     Conduit = 0b010,
