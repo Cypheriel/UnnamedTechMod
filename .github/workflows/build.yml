@@ -1,5 +1,5 @@
 # TODO: Build automatically depending on commit type.
-name: Build .tmod
+name: Build
 
 env:
   TML_VERSION: 2023.06.25.31
