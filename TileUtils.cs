@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.DataStructures;
 using Terraria.ObjectData;
+using UnnamedTechMod.Common.TileData;
 
 namespace UnnamedTechMod;
 
@@ -33,5 +34,29 @@ public static class TileUtils
 
         entity = null;
         return false;
+    }
+
+    public static bool PlaceTransportMedium(int x, int y, TransportType transportType)
+    {
+        var tile = Main.tile[x, y];
+        var data = tile.Get<TransportTileData>();
+
+        if (data.CarriedMediums.HasFlag(transportType))
+            return false;
+
+        data.CarriedMediums |= transportType;
+        return true;
+    }
+    
+    public static bool DestroyTransportMedium(int x, int y, TransportType transportType)
+    {
+        var tile = Main.tile[x, y];
+        var data = tile.Get<TransportTileData>();
+
+        if (!data.CarriedMediums.HasFlag(transportType))
+            return false;
+
+        data.CarriedMediums ^= transportType;
+        return true;
     }
 }
