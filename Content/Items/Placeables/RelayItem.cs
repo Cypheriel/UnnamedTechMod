@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using UnnamedTechMod.Content.Tiles;
 

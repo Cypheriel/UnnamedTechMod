@@ -2,7 +2,6 @@
 
 namespace UnnamedTechMod.Content.Items;
 
-public class DummyItem: ModItem
+public class DummyItem : ModItem
 {
-    
 }

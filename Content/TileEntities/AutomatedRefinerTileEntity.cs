@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace UnnamedTechMod.Content.TileEntities;

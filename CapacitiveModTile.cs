@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Text;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
