@@ -19,6 +19,15 @@ public class TransportNetwork
             throw new ArgumentException("transportType should only be a single flag");
         transportType = TransportType;
     }
+    
+    #nullable enable
+    public static TransportNetwork? TryFromPosition(Point position, TransportType transportType)
+    {
+        return UnnamedTechMod.TransportNetworks
+            .FirstOrDefault(
+                network => network.TransportType == transportType && network.TransportMediums.Contains(position)
+            );
+    }
 
     public static List<TransportNetwork> AdjacentNetworks(int x, int y, TransportType transportType)
     {
@@ -30,12 +39,19 @@ public class TransportNetwork
             new(x, y - 1),
         };
 
-        return (
-            from position in adjacentTilePositions
-            from network in UnnamedTechMod.TransportNetworks
-            where transportType == network.TransportType && network.TransportMediums.Contains(position)
-            select network
-        ).ToList();
+        var result = new List<TransportNetwork>();
+        // Nullability seems to cause issues with converting this to a LINQ expression.
+        // ReSharper disable once LoopCanBeConvertedToQuery
+        foreach (var position in adjacentTilePositions)
+        {
+            var network = TryFromPosition(position, transportType);
+            if (network is not null)
+            {
+                result.Add(network);
+            }
+        }
+
+        return result;
     }
 
     public void MergeNetworks(params TransportNetwork[] others)
