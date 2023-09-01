@@ -21,7 +21,7 @@ public class TransportNetwork
     public TransportNetwork(TransportType transportType, params Point[] positions)
     {
         TransportMedia.CollectionChanged += Handler;
-        
+
         TransportType = transportType;
         foreach (var pos in positions)
         {
@@ -138,10 +138,8 @@ public class TransportNetwork
 
         return connected.ToList();
     }
-
-
-#nullable enable
-    public static TransportNetwork? TryFromPosition(Point position, TransportType transportType)
+    
+    public static TransportNetwork TryFromPosition(Point position, TransportType transportType)
     {
         return TransportDataSaveSystem.TransportNetworks
             .FirstOrDefault(
@@ -188,5 +186,19 @@ public class TransportNetwork
         }
 
         Console.WriteLine($"Total networks: {TransportDataSaveSystem.TransportNetworks.Count}");
+    }
+
+    public void Transfer()
+    {
+        foreach (var source in Sources)
+        {
+            foreach (var load in Loads)
+            {
+                if (TransportType != TransportType.Cable)
+                    return;
+
+                source.Capacitor.TransferEnergy(load.Capacitor, 1f / Sources.Count);
+            }
+        }
     }
 }

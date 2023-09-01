@@ -25,4 +25,12 @@ public class TransportDataSaveSystem : ModSystem
     {
         MemoryMarshal.Cast<byte, TransportTileData>(tag.GetByteArray("tileData")).CopyTo(Main.tile.GetData<TransportTileData>());
     }
+
+    public override void PostUpdateWorld()
+    {
+        foreach (var network in TransportNetworks)
+        {
+            network.Transfer();
+        }
+    }
 }
