@@ -52,16 +52,17 @@ public class Capacitor : TagSerializer<Capacitor, TagCompound>
     /// TransferEnergy `other` based on the minimum voltage and minimum current between both capacitors. Wattage is divided by 60 and operated per-tick.
     /// </summary>
     /// <param name="other">The other capacitor to charge</param>
-    public bool TransferEnergy(Capacitor other)
+    /// <param name="multiplier">Alters max transferrable energyd</param>
+    public bool TransferEnergy(Capacitor other, float multiplier = 1f)
     {
         var effectiveVoltage = Math.Min(Voltage, other.Voltage);
         var effectiveCurrent = Math.Min(Current, other.Current);
-        var wattage = (effectiveVoltage + effectiveCurrent) / 60;
+        var wattage = (effectiveVoltage + effectiveCurrent) * multiplier / 60;
 
         if (!(CapacityJoules > 0) || !(other.CapacityJoules < other.MaxCapacityJoules)) return false;
 
         var capacityPrevious = CapacityJoules;
-        CapacityJoules -= wattage;
+        CapacityJoules -= Math.Min(wattage, other.MaxCapacityJoules - other.CapacityJoules);
         var capacityDifference = capacityPrevious - CapacityJoules;
 
         other.CapacityJoules += capacityDifference;
