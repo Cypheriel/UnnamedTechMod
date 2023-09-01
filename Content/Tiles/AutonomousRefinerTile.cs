@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -7,6 +8,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using UnnamedTechMod.Common.TileData;
 using UnnamedTechMod.Content.TileEntities;
 
 namespace UnnamedTechMod.Content.Tiles;
@@ -14,6 +16,13 @@ namespace UnnamedTechMod.Content.Tiles;
 public class AutomatedRefinerTile : CapacitiveModTile<AutomatedRefinerTileEntity>
 {
     public override string Texture => $"Terraria/Images/Tiles_{TileID.Extractinator}";
+
+    public override List<IOPort> IOPorts => new()
+    {
+        new IOPort(TransportType.Cable, new Point16(1, 2), FlowType.Input),
+        new IOPort(TransportType.PneumaticTube, new Point16(0, 1), FlowType.Input),
+        new IOPort(TransportType.PneumaticTube, new Point16(2, 1), FlowType.Output),
+    };
 
     protected override void SafeSetStaticDefaults()
     {

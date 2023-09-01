@@ -1,15 +1,23 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using UnnamedTechMod.Common.TileData;
 using UnnamedTechMod.Content.TileEntities;
 
 namespace UnnamedTechMod.Content.Tiles;
 
 public class WindTurbineTile : CapacitiveModTile<WindTurbineTileEntity>
 {
+    public override List<IOPort> IOPorts => new()
+    {
+        new IOPort(TransportType.Cable, new Point16(0, 0), FlowType.Output),
+    };
+
     protected override void SafeSetStaticDefaults()
     {
         Main.tileFrameImportant[Type] = true;
