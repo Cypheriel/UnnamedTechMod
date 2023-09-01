@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ObjectData;
+using UnnamedTechMod.Common.Systems;
 using UnnamedTechMod.Common.TileData;
 
 namespace UnnamedTechMod;
@@ -53,7 +54,7 @@ public static class TileUtils
 
         network = new TransportNetwork(transportType, new Point(x, y));
         
-        UnnamedTechMod.TransportNetworks.Add(network);
+        TransportDataSaveSystem.TransportNetworks.Add(network);
         network.MergeNetworks(TransportNetwork.AdjacentNetworks(x, y, transportType).ToArray());
         
         return true;

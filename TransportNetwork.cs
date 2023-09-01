@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using UnnamedTechMod.Common.Systems;
 using UnnamedTechMod.Common.TileData;
 
 namespace UnnamedTechMod;
@@ -37,7 +38,7 @@ public class TransportNetwork
 
         if (TransportMedia.Count == 0)
         {
-            UnnamedTechMod.TransportNetworks.Remove(this);
+            TransportDataSaveSystem.TransportNetworks.Remove(this);
             return;
         }
 
@@ -58,11 +59,11 @@ public class TransportNetwork
             splitNetworks.Add(ConnectedMedia(pos));
         }
 
-        UnnamedTechMod.TransportNetworks.Remove(this);
+        TransportDataSaveSystem.TransportNetworks.Remove(this);
         
         foreach (var splitNetwork in splitNetworks)
         {
-            UnnamedTechMod.TransportNetworks.Add(new TransportNetwork(TransportType, splitNetwork.ToArray()));
+            TransportDataSaveSystem.TransportNetworks.Add(new TransportNetwork(TransportType, splitNetwork.ToArray()));
         }
     }
     
@@ -95,7 +96,7 @@ public class TransportNetwork
     #nullable enable
     public static TransportNetwork? TryFromPosition(Point position, TransportType transportType)
     {
-        return UnnamedTechMod.TransportNetworks
+        return TransportDataSaveSystem.TransportNetworks
             .FirstOrDefault(
                 network => network.TransportType == transportType && network.TransportMedia.Contains(position)
             );
@@ -130,7 +131,7 @@ public class TransportNetwork
     {
         foreach (var network in others)
         {
-            UnnamedTechMod.TransportNetworks.Remove(network);
+            TransportDataSaveSystem.TransportNetworks.Remove(network);
             Loads = Loads.Concat(network.Loads).ToList();
             Sources = Sources.Concat(network.Sources).ToList();
             foreach (var medium in network.TransportMedia)
@@ -139,6 +140,6 @@ public class TransportNetwork
             }
         }
 
-        Console.WriteLine($"Total networks: {UnnamedTechMod.TransportNetworks.Count}");
+        Console.WriteLine($"Total networks: {TransportDataSaveSystem.TransportNetworks.Count}");
     }
 }
