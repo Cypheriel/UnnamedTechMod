@@ -6,7 +6,6 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
 using UnnamedTechMod.Common.Systems;
 using UnnamedTechMod.Common.TileData;
 
