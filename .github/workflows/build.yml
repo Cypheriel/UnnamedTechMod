@@ -60,5 +60,5 @@ jobs:
     - name: Archive .tmod file
       uses: actions/upload-artifact@v3
       with:
-        name: UnnamedTechMod.tmod
+        name: UnnamedTechMod.tmod (${{ matrix.configuration }})
         path: ./tModLoader/Mods/UnnamedTechMod.tmod
