@@ -51,7 +51,7 @@ public class CableDrawSystem : ModSystem
             for (var y = firstTileY; y <= lastTileY; y++)
             {
                 var tileData = Main.tile[x, y].Get<TransportTileData>();
-                if (tileData.CarriedMediums.HasFlag(TransportType.Cable))
+                if (tileData.CarriedMedia.HasFlag(TransportType.Cable))
                 {
                     Main.spriteBatch.Draw(
                         TextureAssets.MagicPixel.Value,

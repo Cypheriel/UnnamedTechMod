@@ -14,5 +14,5 @@ public enum TransportType : byte
 
 public struct TransportTileData : ITileData
 {
-    public TransportType CarriedMediums;
+    public TransportType CarriedMedia;
 }

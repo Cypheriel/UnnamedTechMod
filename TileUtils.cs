@@ -42,10 +42,10 @@ public static class TileUtils
         var tile = Main.tile[x, y];
         ref var data = ref tile.Get<TransportTileData>();
 
-        if (data.CarriedMediums.HasFlag(transportType))
+        if (data.CarriedMedia.HasFlag(transportType))
             return false;
 
-        data.CarriedMediums |= transportType;
+        data.CarriedMedia |= transportType;
 
         var network = TransportNetwork.TryFromPosition(new Point(x, y), transportType);
         if (network is not null)
@@ -64,13 +64,13 @@ public static class TileUtils
         var tile = Main.tile[x, y];
         ref var data = ref tile.Get<TransportTileData>();
 
-        if (!data.CarriedMediums.HasFlag(transportType))
+        if (!data.CarriedMedia.HasFlag(transportType))
             return false;
 
-        data.CarriedMediums ^= transportType;
+        data.CarriedMedia ^= transportType;
         
         var network = TransportNetwork.TryFromPosition(new Point(x, y), transportType);
         
-        return network is not null && network.TransportMediums.Remove(new Point(x, y));
+        return network is not null && network.TransportMedia.Remove(new Point(x, y));
     }
 }

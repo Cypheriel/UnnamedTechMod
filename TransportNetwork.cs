@@ -12,7 +12,7 @@ public class TransportNetwork
 {
     public List<CapacitiveTileEntity> Loads = new();
     public List<CapacitiveTileEntity> Sources = new();
-    public ObservableCollection<Point> TransportMediums = new();
+    public ObservableCollection<Point> TransportMedia = new();
     public TransportType TransportType;
 
     public TransportNetwork(TransportType transportType, params Point[] positions)
@@ -20,14 +20,14 @@ public class TransportNetwork
         TransportType = transportType;
         foreach (var pos in positions)
         {
-            TransportMediums.Add(pos);
+            TransportMedia.Add(pos);
         }
 
-        TransportMediums.CollectionChanged += OnRemoveMedium;
+        TransportMedia.CollectionChanged += OnRemoveMedium;
     }
     
     /// <summary>
-    /// Called upon altering <see cref="TransportMediums"/>.
+    /// Called upon altering <see cref="TransportMedia"/>.
     /// </summary>
     private void OnRemoveMedium(object sender, NotifyCollectionChangedEventArgs e)
     {
@@ -35,7 +35,7 @@ public class TransportNetwork
         if (e.Action != NotifyCollectionChangedAction.Remove || e.OldItems is null || e.OldItems.Count != 1)
             return;
 
-        if (TransportMediums.Count == 0)
+        if (TransportMedia.Count == 0)
         {
             UnnamedTechMod.TransportNetworks.Remove(this);
             return;
@@ -51,11 +51,11 @@ public class TransportNetwork
         };
 
         var splitNetworks = new List<List<Point>>();
-        foreach (var pos in adjacentTilePositions.Where(p => TransportMediums.Contains(p)))
+        foreach (var pos in adjacentTilePositions.Where(p => TransportMedia.Contains(p)))
         {
             if (splitNetworks.Any(n => n.Contains(pos)))
                 continue;
-            splitNetworks.Add(ConnectedMediums(pos));
+            splitNetworks.Add(ConnectedMedia(pos));
         }
 
         UnnamedTechMod.TransportNetworks.Remove(this);
@@ -67,10 +67,10 @@ public class TransportNetwork
     }
     
     /// <summary>
-    /// Used to get transport mediums that are connected in a group.
+    /// Used to get transport media that are connected in a group.
     /// </summary>
-    /// <returns>All transport mediums connected to the current medium</returns>
-    public List<Point> ConnectedMediums(Point current, HashSet<Point> connected = null)
+    /// <returns>All transport media connected to the current medium</returns>
+    public List<Point> ConnectedMedia(Point current, HashSet<Point> connected = null)
     {
         connected ??= new HashSet<Point>();
         connected.Add(current);
@@ -83,9 +83,9 @@ public class TransportNetwork
             new(current.X, current.Y - 1),
         };
 
-        foreach (var pos in adjacentTilePositions.Where(p => TransportMediums.Contains(p) && !connected.Contains(p)))
+        foreach (var pos in adjacentTilePositions.Where(p => TransportMedia.Contains(p) && !connected.Contains(p)))
         {
-            ConnectedMediums(pos, connected);
+            ConnectedMedia(pos, connected);
         }
 
         return connected.ToList();
@@ -97,7 +97,7 @@ public class TransportNetwork
     {
         return UnnamedTechMod.TransportNetworks
             .FirstOrDefault(
-                network => network.TransportType == transportType && network.TransportMediums.Contains(position)
+                network => network.TransportType == transportType && network.TransportMedia.Contains(position)
             );
     }
 
@@ -133,9 +133,9 @@ public class TransportNetwork
             UnnamedTechMod.TransportNetworks.Remove(network);
             Loads = Loads.Concat(network.Loads).ToList();
             Sources = Sources.Concat(network.Sources).ToList();
-            foreach (var medium in network.TransportMediums)
+            foreach (var medium in network.TransportMedia)
             {
-                TransportMediums.Add(medium);
+                TransportMedia.Add(medium);
             }
         }
 
