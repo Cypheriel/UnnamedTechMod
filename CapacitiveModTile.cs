@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Localization;
@@ -24,6 +25,8 @@ public abstract class CapacitiveModTile<T> : CapacitiveModTile where T : Capacit
     /// Defaults to localized text of <c>Mods.{Mod.Name}.Tiles.{Name}.MapEntry</c>
     /// </remarks>
     protected virtual string TileName => Language.GetTextValue($"Mods.{Mod.Name}.Tiles.{Name}.MapEntry");
+
+    public virtual List<IOPort> IOPorts => new();
 
     public sealed override void SetStaticDefaults()
     {
